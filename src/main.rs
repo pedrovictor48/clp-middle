@@ -19,7 +19,10 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         App::new()
-            .route("/hello", web::get().to(|| async { "Hello World!" }))
+            .route("/createTransferTedDoc", web::post().to(routes::createTransferTedDoc))
+            .route("/updateTransferTedDoc", web::post().to(routes::updateTransferTedDoc))
+            .route("/createTransferPix", web::post().to(routes::createTransferPix))
+            .route("/updateTransferPix", web::post().to(routes::updateTransferPix))
     })
     .bind(format!("{}:{}", HOST, PORT))?
     .run()
