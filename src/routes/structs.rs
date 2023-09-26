@@ -1,3 +1,6 @@
+use serde::{Deserialize, Serialize};
+
+
 #[derive(Deserialize, Serialize)]
 pub struct create_transfer {
     pub doc_cliente_origem: i32,
