@@ -22,3 +22,16 @@ pub struct update_transfer {
 pub struct delete_transfer {
     pub id: i32,
 }
+
+#[derive(Deserialize, Serialize)]
+pub struct create_transfer_pix {
+    pub chave: String,
+    pub tipo: String,
+    pub transfer_id: i32,
+}
+
+#[derive(Deserialize, Serialize)]
+pub struct update_transfer_pix {
+    pub id: i32,
+    pub chave: String,
+}
