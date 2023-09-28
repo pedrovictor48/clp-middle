@@ -1,5 +1,10 @@
 use serde::{Deserialize, Serialize};
 
+#[derive(Serialize, Deserialize, Debug)]
+pub struct UserAuth{
+    pub email,
+    pub password,
+}
 
 #[derive(Deserialize, Serialize)]
 pub struct create_transfer {
