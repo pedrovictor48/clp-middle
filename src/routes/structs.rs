@@ -3,25 +3,14 @@ use serde::{Deserialize, Serialize};
 // Login Route
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct AccountDetails {
-    pub client_type: i64,
-    pub address: String,
-    pub username: String,
-    pub password: String, 
-    pub phone: String,
-    pub status: i64,
-    pub id: i64,
-    pub mounthly_income: i64,
-    pub official_document: i64,
-    pub client_id: i64,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct UserData {
-    pub username: String,
+pub struct Account{
+    pub login: String,
     pub password: String,
+    pub cpf: String,
+    pub name: String, 
+    pub balance: String,
+    pub id: i64,
 }
-
 #[derive(Debug)]
 pub enum Response {
     Results(Vec<AccountDetails>),
@@ -29,7 +18,7 @@ pub enum Response {
 }
 
 #[derive(Serialize)]
-pub struct ResponseMessage {
+pub struct Response{
     pub code: i32,
     pub message: String,
     pub logged: String,
@@ -38,29 +27,15 @@ pub struct ResponseMessage {
 // Transfer Route
 
 #[derive(Deserialize, Serialize)]
-pub struct create_transfer {
-    pub docClienteOrigem: i32,
-    pub docClienteDestino: i32,
-    pub nomeClienteOrigem: String,
-    pub nomeClienteDestino: String,
-    pub bancoOrigem: String,
-    pub bancoDestino: String,
-    pub ValorTransf: i32,
-    pub DataHora: String,
+pub struct doTransfer {
+    pub origin_account: String,
+    pub target_account_or_pix_key: i32,
+    pub value: f32,
+    pub transference_type: i32,
+    pub selected_date: String,
+    pub hour: String,
 }
 
-#[derive(Deserialize, Serialize)]
-pub struct update_transfer {
-    pub id: i32,
-    pub bancoDestino: String,
-    pub ValorTransf: i32,
-    pub DataHora: String,
-}
-
-#[derive(Deserialize, Serialize)]
-pub struct delete_transfer {
-    pub id: i32,
-}
 
 #[derive(Deserialize, Serialize)]
 pub struct new_PIX {
