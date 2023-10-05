@@ -1,19 +1,50 @@
 use serde::{Deserialize, Serialize};
 
+// Login Route
+
 #[derive(Serialize, Deserialize, Debug)]
-pub struct UserAuth{
-    pub email,
-    pub password,
+pub struct AccountDetails {
+    pub client_type: i64,
+    pub address: String,
+    pub username: String,
+    pub password: String, 
+    pub phone: String,
+    pub status: i64,
+    pub id: i64,
+    pub mounthly_income: i64,
+    pub official_document: i64,
+    pub client_id: i64,
 }
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct UserData {
+    pub username: String,
+    pub password: String,
+}
+
+#[derive(Debug)]
+pub enum Response {
+    Results(Vec<AccountDetails>),
+    Error(Vec<reqwest::Error>),
+}
+
+#[derive(Serialize)]
+pub struct ResponseMessage {
+    pub code: i32,
+    pub message: String,
+    pub logged: String,
+}
+
+// Transfer Route
 
 #[derive(Deserialize, Serialize)]
 pub struct create_transfer {
-    pub doc_cliente_origem: i32,
-    pub doc_cliente_cest: i32,
-    pub nome_cliente_origem: String,
-    pub nome_cliente_des: String,
-    pub banco_ori: String,
-    pub banco_dest: String,
+    pub docClienteOrigem: i32,
+    pub docClienteDestino: i32,
+    pub nomeClienteOrigem: String,
+    pub nomeClienteDestino: String,
+    pub bancoOrigem: String,
+    pub bancoDestino: String,
     pub ValorTransf: i32,
     pub DataHora: String,
 }
@@ -21,8 +52,8 @@ pub struct create_transfer {
 #[derive(Deserialize, Serialize)]
 pub struct update_transfer {
     pub id: i32,
-    pub banco_destino: String,
-    pub Valor_transf: i32,
+    pub bancoDestino: String,
+    pub ValorTransf: i32,
     pub DataHora: String,
 }
 
@@ -32,14 +63,33 @@ pub struct delete_transfer {
 }
 
 #[derive(Deserialize, Serialize)]
-pub struct create_transfer_pix {
+pub struct new_PIX {
     pub chave: String,
     pub tipo: String,
+    pub transfer_id: i32,
+    pub value: f64,
+}
+
+#[derive(Deserialize, Serialize)]
+pub struct make_PIX{
+    pub id: i32,
+    pub chave: String,
+}
+
+#[derive(Deserialize, Serialize)]
+pub struct new_TED{
+    pub agencia: String,
+    pub conta: String,
     pub transfer_id: i32,
 }
 
 #[derive(Deserialize, Serialize)]
-pub struct update_transfer_pix {
+pub struct make_TED {
     pub id: i32,
-    pub chave: String,
+    pub conta: String,
 }
+
+#[derive(Serialize)]
+pub struct Test{
+    pub status: String,
+} 
